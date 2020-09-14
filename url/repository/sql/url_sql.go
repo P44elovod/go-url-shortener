@@ -16,7 +16,14 @@ func NewURLRepository(db *gorm.DB) domain.URLRepository {
 	}
 }
 
-func (r *sqlURLRepository) Store(url *domain.URL) (err error)
+func (r *sqlURLRepository) Store(url *domain.URL) (id uint, err error) {
+	res := r.DB.Create(&url)
+
+	err = res.Error
+	id = url.ID
+
+	return
+}
 func (r *sqlURLRepository) GetAll() (urlList []domain.URL)
 func (r *sqlURLRepository) GetByHash(hash string) (url domain.URL)
 func (r *sqlURLRepository) GetByID(id string) (url domain.URL)
