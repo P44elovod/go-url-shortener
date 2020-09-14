@@ -9,4 +9,10 @@ type URL struct {
 }
 
 type URLUseCase interface{}
-type URLRepository interface{}
+
+type URLRepository interface {
+	Store(url *URL) (err error)
+	GetAll() (urlList []URL)
+	GetByHash(hash string) (url URL)
+	GetByID(id string) (url URL)
+}
