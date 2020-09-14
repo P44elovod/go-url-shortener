@@ -12,7 +12,7 @@ type URLUseCase interface{}
 
 type URLRepository interface {
 	Store(url *URL) (id uint, err error)
-	GetAll() (urlList []URL)
-	GetByHash(hash string) (url URL)
-	GetByID(id string) (url URL)
+	GetAll() (urlList []URL, err error)
+	GetByHash(hash string) (url URL, err error)
+	GetByID(id string) (url URL, err error)
 }

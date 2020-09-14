@@ -24,6 +24,25 @@ func (r *sqlURLRepository) Store(url *domain.URL) (id uint, err error) {
 
 	return
 }
-func (r *sqlURLRepository) GetAll() (urlList []domain.URL)
-func (r *sqlURLRepository) GetByHash(hash string) (url domain.URL)
-func (r *sqlURLRepository) GetByID(id string) (url domain.URL)
+func (r *sqlURLRepository) GetAll() (urlList []domain.URL, err error) {
+	if r.DB.Table("url").Find(&urlList).RecordNotFound() {
+		err = gorm.ErrRecordNotFound
+	}
+
+	return
+}
+
+func (r *sqlURLRepository) GetByHash(hash string) (url domain.URL, err error) {
+	if r.DB.Table("url").Where("hash = ?", hash).First(&url).RecordNotFound() {
+		err = gorm.ErrRecordNotFound
+	}
+
+	return
+}
+func (r *sqlURLRepository) GetByID(id string) (url domain.URL, err error) {
+	if r.DB.Table("url").Where("id = ?", id).First(&url).RecordNotFound() {
+		err = gorm.ErrRecordNotFound
+	}
+
+	return
+}
