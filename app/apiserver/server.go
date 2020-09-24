@@ -7,7 +7,8 @@ type server struct {
 }
 
 func newServer() *server {
-	return &server{
+	s := &server{
 		router: gin.Default(),
 	}
+	return s
 }

@@ -8,7 +8,10 @@ type URL struct {
 	URLAdrress string
 }
 
-type URLUseCase interface{}
+type URLUseCase interface {
+	Create(url *URL) map[string]interface{}
+	GetByHash(id string) map[string]interface{}
+}
 
 type URLRepository interface {
 	Store(url *URL) (id uint, err error)
